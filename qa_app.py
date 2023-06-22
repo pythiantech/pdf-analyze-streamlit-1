@@ -14,6 +14,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.callbacks.base import CallbackManager
 from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.document_loaders import UnstructuredEPubLoader
 
 
 st.set_page_config(page_title="PDF Analyzer",page_icon=':shark:')
@@ -34,6 +35,9 @@ def load_docs(files):
             stringio = StringIO(file_path.getvalue().decode("utf-8"))
             text = stringio.read()
             all_text += text
+        elif file_extension == ".epub":
+            loader = UnstructuredEPubLoader(file_path)
+            all_text = loader.load()
         else:
             st.warning('Please provide txt or pdf.', icon="⚠️")
     return all_text
@@ -113,7 +117,7 @@ def main():
         padding: 0px 0px;
         text-align: center;
     ">
-        <p>Made by <a href='https://twitter.com/mehmet_ba7'>Mehmet Balioglu</a></p>
+        <p>Made by <a href='mailto:dhiraj@pythtech.com'>Dhiraj Khanna</a></p>
     </div>
     """
 
@@ -168,7 +172,7 @@ def main():
         """,
         unsafe_allow_html=True,
     )
-    st.sidebar.image("img/logo1.png")
+    st.sidebar.image("img/pythian.png")
 
 
    
@@ -215,7 +219,7 @@ def main():
         os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
 
     uploaded_files = st.file_uploader("Upload a PDF or TXT Document", type=[
-                                      "pdf", "txt"], accept_multiple_files=True)
+                                      "pdf", "txt", "epub"], accept_multiple_files=True)
 
     if uploaded_files:
         # Check if last_uploaded_files is not in session_state or if uploaded_files are different from last_uploaded_files
