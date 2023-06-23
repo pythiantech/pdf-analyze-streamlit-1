@@ -1,7 +1,7 @@
 ![Logo](img/pythian.png "Logo")
 
 
-**Try the app here:** [PDF Analyzer on Streamlit Cloud](https://mehmetba-pdf-analyze-streamlit-qa-app-5uufsy.streamlit.app/)
+**Try the app here:** [PDF Analyzer on Streamlit Cloud](https://pyhtian-pdf.streamlit.app/)
 
 # PDF Analyzer App
 
